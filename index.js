@@ -27,6 +27,10 @@ async function main() {
     const http = new httpm.HttpClient();
     const response = await http.postJson(requestUrl, data);
 
+    Object.entries(response).forEach(([name, value]) => {
+      core.info(`> Sleuth API response ${name}: ${value}`);
+    });
+
     core.setOutput('status', response.statusCode);
     core.setOutput('body', response.result);
 
