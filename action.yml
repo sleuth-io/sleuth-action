@@ -16,6 +16,7 @@ inputs:
   sha:
     description: 'The git SHA of the deployment'
     required: true
+    default: ${{ github.sha }}
   environment:
     description: 'String defining the environment to register the deploy against'
   email:
