@@ -11,7 +11,7 @@ async function main() {
     const sha = core.getInput('sha');
 
     const requestUrl = `https://app.sleuth.io/api/1/${organizationSlug}/${deploymentSlug}/register_deploy`;
-    core.info(requestUrl);
+    core.info(`Sleuth API URL ${requestUrl}`);
 
     const data = {
       api_key: apiKey,
@@ -21,7 +21,7 @@ async function main() {
     };
 
     for (const [name, value] of Object.entries(data)) {
-      core.info(`> ${name}: ${value}`);
+      core.info(`> Sleuth API payload ${name}: ${value}`);
     }
 
     let http = new httpm.HttpClient();
