@@ -4,13 +4,13 @@ branding:
   icon: codepen
   color: blue
 inputs:
-  organizationSlug:
+  organization-slug:
     description: 'Slug of the organization parent of the affected code deployment'
     required: true
-  deploymentSlug:
+  deployment-slug:
     description: 'Slug of the code deployment'
     required: true
-  apiKey:
+  api-key:
     description: 'Sleuth organization API key'
     required: true
   sha:
