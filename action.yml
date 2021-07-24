@@ -1,0 +1,24 @@
+name: 'Sleuth API Deploy Registration'
+description: 'Register a deploy via the Sleuth API'
+branding:
+  icon: codepen
+  color: blue
+inputs:
+  organizationSlug:
+    description: 'Slug of the organization parent of the affected code deployment'
+    required: true
+  deploymentSlug:
+    description: 'Slug of the code deployment'
+    required: true
+  environment:
+    description: 'String defining the environment to register the deploy against'
+  email:
+    description: 'Email address of author'
+outputs:
+  status:
+    description: 'Response status code'
+  body:
+    description: 'Body of the response'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

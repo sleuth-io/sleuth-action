@@ -1,0 +1,24 @@
+{
+  "name": "sleuth-action",
+  "version": "1.0.0",
+  "description": "A GitHub action to register a deploy to Sleuth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baratrion/sleuth-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baratrion/sleuth-action/issues"
+  },
+  "homepage": "https://github.com/baratrion/sleuth-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.4.0",
+    "@actions/http-client": "^1.0.11"
+  }
+}
