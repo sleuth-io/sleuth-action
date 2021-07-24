@@ -25,7 +25,7 @@ async function main() {
     }
 
     let http = new httpm.HttpClient();
-    let response = await http.post(requestUrl, data);
+    let response = await http.postJson(requestUrl, data);
 
     core.info(response);
     core.setOutput('status', response.message.statusCode);
