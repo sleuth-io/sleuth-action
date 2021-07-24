@@ -1493,11 +1493,11 @@ const httpm = __nccwpck_require__(925);
 
 async function main() {
   try {
-    const organizationSlug = core.getInput('organizationSlug');
-    const deploymentSlug = core.getInput('deploymentSlug');
+    const organizationSlug = core.getInput('organization-slug');
+    const deploymentSlug = core.getInput('deployment-slug');
     const environment = core.getInput('environment');
     const email = core.getInput('email');
-    const apiKey = core.getInput('apiKey');
+    const apiKey = core.getInput('api-key');
     const sha = core.getInput('sha');
 
     const requestUrl = `https://app.sleuth.io/api/1/deployments/${organizationSlug}/${deploymentSlug}/register_deploy`;

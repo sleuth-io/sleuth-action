@@ -32,14 +32,11 @@ jobs:
         id: sleuth
         uses: baratrion/sleuth-action@main  # This should be a version tag
         with:
-          organizationSlug: 'your-sleuth-organization'
-          deploymentSlug: 'your-deployment-slug'
-          apiKey: ${{ secrets.SLEUTH_API_KEY }}
-          sha: ${{ github.sha }}
+          organization-slug: 'your-sleuth-organization'
+          deployment-slug: 'your-deployment-slug'
+          api-key: ${{ secrets.SLEUTH_API_KEY }}
       # Use the output from the `sleuth` step
       - name: Get the response status
         run: echo "Status code ${{ steps.sleuth.outputs.status }}"
 
 ```
-
-
