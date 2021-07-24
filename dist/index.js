@@ -1518,8 +1518,8 @@ async function main() {
     let response = await http.postJson(requestUrl, data);
 
     core.info(response);
-    core.setOutput('status', response.message.statusCode);
-    core.setOutput('body', response.message);
+    core.setOutput('status', response.statusCode);
+    core.setOutput('body', response.result);
 
   }
   catch (error) {
