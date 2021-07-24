@@ -17,6 +17,8 @@ async function main() {
       environment: environment,
       email: email
     };
+
+    core.info(data);
     
     let response = await httpClient.post(requestUrl, data);
 
