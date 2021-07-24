@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const httpm = require('@actions/http-client')
+const httpm = require('@actions/http-client');
 
 async function main() {
   try {
@@ -10,32 +10,30 @@ async function main() {
     const apiKey = core.getInput('apiKey');
     const sha = core.getInput('sha');
 
-    const requestUrl = `https://app.sleuth.io/api/1/${organizationSlug}/${deploymentSlug}/register_deploy`;
+    const requestUrl = `https://app.sleuth.io/api/1/deployments/${organizationSlug}/${deploymentSlug}/register_deploy`;
     core.info(`Sleuth API URL ${requestUrl}`);
 
     const data = {
       api_key: apiKey,
-      sha: sha,
-      environment: environment,
-      email: email
+      sha,
+      environment,
+      email,
     };
 
-    for (const [name, value] of Object.entries(data)) {
+    Object.entries(data).forEach(([name, value]) => {
       core.info(`> Sleuth API payload ${name}: ${value}`);
-    }
+    });
 
-    let http = new httpm.HttpClient();
-    let response = await http.postJson(requestUrl, data);
+    const http = new httpm.HttpClient();
+    const response = await http.postJson(requestUrl, data);
 
     core.setOutput('status', response.statusCode);
     core.setOutput('body', response.result);
 
-    if (response.statusCode != httpm.HttpCodes.OK) {
+    if (response.statusCode !== httpm.HttpCodes.OK) {
       throw new httpm.HttpClientError('Failed to ping Sleuth', response.statusCode);
     }
-
-  }
-  catch (error) {
+  } catch (error) {
     core.setFailed(error.message);
   }
 }

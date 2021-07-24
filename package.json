@@ -2,17 +2,24 @@
   "name": "sleuth-action",
   "version": "1.0.0",
   "description": "A GitHub action to register a deploy to Sleuth",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build index.js --license licenses.txt",
+    "lint": "eslint *.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/baratrion/sleuth-action.git"
   },
-  "keywords": [],
+  "keywords": [
+    "Sleuth",
+    "sleuth.io",
+    "GitHub",
+    "Actions"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/baratrion/sleuth-action/issues"
   },
@@ -20,5 +27,11 @@
   "dependencies": {
     "@actions/core": "^1.4.0",
     "@actions/http-client": "^1.0.11"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.29.0",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
   }
 }
