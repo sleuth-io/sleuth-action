@@ -21,7 +21,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job called "deploy"
   deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -32,8 +32,8 @@ jobs:
         id: sleuth
         uses: baratrion/sleuth-action@main  # This should be a version tag
         with:
-          organizationSlug: 'my-organization'
-          deploymentSlug: 'deployment-slug'
+          organizationSlug: 'your-sleuth-organization'
+          deploymentSlug: 'your-deployment-slug'
           apiKey: ${{ secrets.SLEUTH_API_KEY }}
           sha: ${{ github.sha }}
       # Use the output from the `sleuth` step
