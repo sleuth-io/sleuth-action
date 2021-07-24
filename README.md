@@ -1,2 +1,45 @@
 # sleuth-action
 A GitHub action to register a deploy to Sleuth
+
+## Usage
+
+An example might look something like this:
+
+```yml
+# This is a basic workflow to help you get started with Actions
+
+name: CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push but only for the main branch
+  push:
+    branches: [ main ]
+ 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Register deploy to Sleuth
+        id: sleuth
+        uses: baratrion/sleuth-action
+        with:
+          organizationSlug: 'my-organization'
+          deploymentSlug: 'deployment-slug'
+          apiKey: ${{ secrets.SLEUTH_API_KEY }}
+          sha: ${{ GITHUB_SHA }}
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+```
+
+
