@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const httpClient = require('@actions/http-client')
+const httpm = require('@actions/http-client')
 
 async function main() {
   try {
@@ -18,9 +18,8 @@ async function main() {
       email: email
     };
 
-    core.info(data);
-    
-    let response = await httpClient.post(requestUrl, data);
+    let http = new httpm.HttpClient();
+    let response = await http.post(requestUrl, data);
 
     core.setOutput('status', response.message.statusCode);
 

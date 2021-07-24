@@ -1489,7 +1489,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(127);
-const httpClient = __nccwpck_require__(840)
+const httpm = __nccwpck_require__(840)
 
 async function main() {
   try {
@@ -1508,9 +1508,8 @@ async function main() {
       email: email
     };
 
-    core.info(data);
-    
-    let response = await httpClient.post(requestUrl, data);
+    let http = new httpm.HttpClient();
+    let response = await http.post(requestUrl, data);
 
     core.setOutput('status', response.message.statusCode);
 
