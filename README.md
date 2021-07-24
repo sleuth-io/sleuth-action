@@ -36,9 +36,9 @@ jobs:
           deploymentSlug: 'deployment-slug'
           apiKey: ${{ secrets.SLEUTH_API_KEY }}
           sha: ${{ GITHUB_SHA }}
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      # Use the output from the `sleuth` step
+      - name: Get the response status
+        run: echo "Status code ${{ steps.sleuth.outputs.status }}"
 
 ```
 
