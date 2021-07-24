@@ -1501,6 +1501,8 @@ async function main() {
     const sha = core.getInput('sha');
 
     const requestUrl = `https://app.sleuth.io/api/1/${organizationSlug}/${deploymentSlug}/register_deploy`;
+    core.info(requestUrl);
+
     const data = {
       api_key: apiKey,
       sha: sha,
@@ -1508,13 +1510,16 @@ async function main() {
       email: email
     };
 
+    for (const [name, value] of Object.entries(data)) {
+      core.info(`> ${name}: ${value}`);
+    }
+
     let http = new httpm.HttpClient();
     let response = await http.post(requestUrl, data);
 
+    core.info(response);
     core.setOutput('status', response.message.statusCode);
-
-    let body = await response.readBody();
-    core.setOutput('body', body);
+    core.setOutput('body', response.message);
 
   }
   catch (error) {
