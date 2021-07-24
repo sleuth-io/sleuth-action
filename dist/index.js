@@ -1520,6 +1520,10 @@ async function main() {
     core.setOutput('status', response.statusCode);
     core.setOutput('body', response.result);
 
+    if (response.statusCode != httpm.HttpCodes.OK) {
+      throw new httpm.HttpClientError('Failed to ping Sleuth', response.statusCode);
+    }
+
   }
   catch (error) {
     core.setFailed(error.message);
