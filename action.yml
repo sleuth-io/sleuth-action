@@ -10,6 +10,12 @@ inputs:
   deploymentSlug:
     description: 'Slug of the code deployment'
     required: true
+  apiKey:
+    description: 'Sleuth organization API key'
+    required: true
+  sha:
+    description: 'The git SHA of the deployment'
+    required: true
   environment:
     description: 'String defining the environment to register the deploy against'
   email:
