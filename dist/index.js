@@ -1511,18 +1511,13 @@ async function main() {
     };
 
     Object.entries(data).forEach(([name, value]) => {
-      core.info(`> Sleuth API payload ${name}: ${value}`);
+      core.info(`> Sleuth API request payload ${name}: ${value}`);
     });
 
     const http = new httpm.HttpClient();
     const response = await http.postJson(requestUrl, data);
 
-    Object.entries(response).forEach(([name, value]) => {
-      core.info(`> Sleuth API response ${name}: ${value}`);
-    });
-
     core.setOutput('status', response.statusCode);
-    core.setOutput('body', response.result);
 
     if (response.statusCode !== httpm.HttpCodes.OK) {
       throw new httpm.HttpClientError('Failed to ping Sleuth', response.statusCode);
