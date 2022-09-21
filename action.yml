@@ -21,6 +21,9 @@ inputs:
     description: 'String defining the environment to register the deploy against'
   email:
     description: 'Email address of author'
+  ignore-if-duplicate:
+    description: 'Will not cause a failure if a deploy already exists'
+    default: 'false'
 outputs:
   status:
     description: 'Response status code'

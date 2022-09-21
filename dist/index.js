@@ -1499,12 +1499,15 @@ async function main() {
     const email = core.getInput('email');
     const apiKey = core.getInput('api-key');
     const sha = core.getInput('sha');
+    const ignoreDupes = core.getInput('ignore-if-duplicate');
+
 
     const requestUrl = `https://app.sleuth.io/api/1/deployments/${organizationSlug}/${deploymentSlug}/register_deploy`;
     core.info(`Sleuth API URL ${requestUrl}`);
 
     const data = {
       api_key: apiKey,
+      ignore_if_duplicate: ignoreDupes,
       sha,
       environment,
       email,
