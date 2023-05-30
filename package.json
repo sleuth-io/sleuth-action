@@ -1,6 +1,6 @@
 {
   "name": "sleuth-action",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A GitHub action to register a deploy to Sleuth",
   "main": "dist/index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/baratrion/sleuth-action#readme",
   "dependencies": {
-    "@actions/core": "^1.4.0",
+    "@actions/core": "^1.10.0",
     "@actions/http-client": "^1.0.11"
   },
   "devDependencies": {
