@@ -1777,6 +1777,72 @@ function isLoopbackAddress(host) {
 
 /***/ }),
 
+/***/ 702:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+class BasicCredentialHandler {
+    constructor(username, password) {
+        this.username = username;
+        this.password = password;
+    }
+    prepareRequest(options) {
+        options.headers['Authorization'] =
+            'Basic ' +
+                Buffer.from(this.username + ':' + this.password).toString('base64');
+    }
+    // This handler cannot handle 401
+    canHandleAuthentication(response) {
+        return false;
+    }
+    handleAuthentication(httpClient, requestInfo, objs) {
+        return null;
+    }
+}
+exports.BasicCredentialHandler = BasicCredentialHandler;
+class BearerCredentialHandler {
+    constructor(token) {
+        this.token = token;
+    }
+    // currently implements pre-authorization
+    // TODO: support preAuth = false where it hooks on 401
+    prepareRequest(options) {
+        options.headers['Authorization'] = 'Bearer ' + this.token;
+    }
+    // This handler cannot handle 401
+    canHandleAuthentication(response) {
+        return false;
+    }
+    handleAuthentication(httpClient, requestInfo, objs) {
+        return null;
+    }
+}
+exports.BearerCredentialHandler = BearerCredentialHandler;
+class PersonalAccessTokenCredentialHandler {
+    constructor(token) {
+        this.token = token;
+    }
+    // currently implements pre-authorization
+    // TODO: support preAuth = false where it hooks on 401
+    prepareRequest(options) {
+        options.headers['Authorization'] =
+            'Basic ' + Buffer.from('PAT:' + this.token).toString('base64');
+    }
+    // This handler cannot handle 401
+    canHandleAuthentication(response) {
+        return false;
+    }
+    handleAuthentication(httpClient, requestInfo, objs) {
+        return null;
+    }
+}
+exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHandler;
+
+
+/***/ }),
+
 /***/ 925:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -3444,6 +3510,7 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(186);
 const httpm = __nccwpck_require__(925);
+const auth = __nccwpck_require__(702);
 
 async function main() {
   try {
@@ -3458,7 +3525,6 @@ async function main() {
     core.info(`Sleuth API URL ${requestUrl}`);
 
     const data = {
-      api_key: apiKey,
       sha,
       environment,
       email,
@@ -3468,7 +3534,9 @@ async function main() {
       core.info(`> Sleuth API request payload ${name}: ${value}`);
     });
 
-    const http = new httpm.HttpClient();
+    const authHeader = new auth.BasicCredentialHandler(apiKey);
+    const http = new httpm.HttpClient('sleuth-http-client', [authHeader]);
+
     const response = await http.postJson(requestUrl, data);
 
     core.setOutput('status', response.statusCode);
