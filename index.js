@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const httpm = require('@actions/http-client');
+const auth = require('@actions/http-client/auth');
 
 async function main() {
   try {
@@ -14,7 +15,6 @@ async function main() {
     core.info(`Sleuth API URL ${requestUrl}`);
 
     const data = {
-      api_key: apiKey,
       sha,
       environment,
       email,
@@ -24,7 +24,9 @@ async function main() {
       core.info(`> Sleuth API request payload ${name}: ${value}`);
     });
 
-    const http = new httpm.HttpClient();
+    const authHeader = new auth.BasicCredentialHandler(apiKey);
+    const http = new httpm.HttpClient('sleuth-http-client', [authHeader]);
+
     const response = await http.postJson(requestUrl, data);
 
     core.setOutput('status', response.statusCode);
